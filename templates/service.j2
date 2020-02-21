@@ -1,0 +1,54 @@
+[Unit]
+Description=Minio
+
+Wants=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=10s
+EnvironmentFile=/etc/environment
+
+ExecStop=/bin/sh -c '/usr/bin/docker ps | /bin/grep %p 1> /dev/null && /usr/bin/docker stop %p || true'
+ExecStartPre=/bin/sh -c '/usr/bin/docker ps | /bin/grep %p 1> /dev/null && /usr/bin/docker kill %p || true'
+ExecStartPre=/bin/sh -c '/usr/bin/docker ps -a | /bin/grep %p 1> /dev/null && /usr/bin/docker rm %p || true'
+ExecStartPre=/usr/bin/docker pull {{ minio_image }}
+ExecStart=/usr/bin/docker run --rm \
+  --name %p \
+  --hostname %p \
+  --label traefik.enable=true \
+  --label traefik.docker.network={{ minio_network }} \
+  --label traefik.http.services.minio.loadbalancer.server.port=9000 \
+  --label traefik.http.services.minio.loadbalancer.server.scheme=http \
+  --label traefik.http.services.minio.loadbalancer.passhostheader=true \
+  --label traefik.http.routers.minio.rule="Host(`{{ minio_domain.split(",") | join("`, `") }}`){% if minio_prefix | default(False) %} && PathPrefix(`{{ minio_prefix.split(",") | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio.service=minio@docker \
+  --label traefik.http.routers.minio.entrypoints=https \
+  --label traefik.http.routers.minio.tls=true \
+{% if minio_cert_resolver | default(False) %}
+  --label traefik.http.routers.minio.tls.certresolver={{ minio_cert_resolver }} \
+{% endif %}
+  --label traefik.http.routers.minio.middlewares={{ minio_secure_middlewares | join(",") }} \
+  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domain.split(",") | join("`, `") }}`){% if minio_prefix | default(False) %} && PathPrefix(`{{ minio_prefix.split(",") | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio-insecure.service=minio@docker \
+  --label traefik.http.routers.minio-insecure.entrypoints=http \
+  --label traefik.http.routers.minio-insecure.middlewares={{ minio_insecure_middlewares | join(",") }} \
+  --env-file /etc/default/minio \
+{% if minio_network | default(False) %}
+  --network {{ minio_network }} \
+{% endif %}
+  --volume /etc/ssl:/etc/ssl:ro \
+{% if minio_volume_server | default(False) %}
+  --volume {{ minio_volume_server }}:/var/lib/minio \
+{% endif %}
+{% if minio_publish_server | default(False) %}
+  --publish {{ minio_publish_server }}:9000 \
+{% endif %}
+  --health-cmd /usr/bin/healthcheck \
+  --health-interval 10s \
+  --health-retries 20 \
+  --health-timeout 10s \
+  {{ minio_image }}
+
+[Install]
+WantedBy=multi-user.target

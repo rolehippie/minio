@@ -1,0 +1,62 @@
+# Standards: 0.1
+---
+# @var minio_image:description: Docker image to use
+minio_image: webhippie/minio:latest
+
+# @var minio_network:description: Docker network to connect to
+minio_network: traefik
+
+# @var minio_volume_server:description: Path to server volume
+minio_volume_server: /var/lib/minio
+
+# @var minio_publish_server:description: Publish the service on that binding
+minio_publish_server:
+
+# @var minio_cert_resolver:description: Cert resolver within traefik
+minio_cert_resolver: default
+
+# @var minio_secure_middlewares:description: Secure middlewares for traefik
+minio_secure_middlewares:
+  - secure@file
+  - errors@file
+
+# @var minio_insecure_middlewares:description: Insecure middlewares for traefik
+minio_insecure_middlewares:
+  - https@file
+  - errors@file
+
+# @var minio_domain:description: Domain to access this instance
+minio_domain: localhost
+
+# @var minio_prefix:description: Optional path prefix to access it
+minio_prefix:
+
+# @var minio_access_key:description: For security reasons you should overwrite this value by your own
+minio_access_key: 69c353dfb7d5caa1a0f8eaf91f52120dc7f713c9
+
+# @var minio_secret_key:description: For security reasons you should overwrite this value by your own
+minio_secret_key: 954cde1f5a3c9b090584e7794ab9a71f9d11d7a1
+
+# @var minio_region:description: Region used within this instance
+minio_region: us-east-1
+
+# @var minio_client_url:description: Download URL for Minio CLI
+minio_client_url: https://dl.minio.io/client/mc/release/linux-amd64/mc
+
+# @var minio_prometheus_auth_type:description: Auth type for prometheus endpoint
+minio_prometheus_auth_type: public
+
+# @var minio_cronjobs:description: List of cronjob definitions for maintenance
+# @var minio_cronjobs:example: >
+# minio_cronjobs:
+#   - name: maintenance
+#     minute: '0'
+#     hour: '0'
+#     day: '*'
+#     month: '*'
+#     weekday: '*'
+#     job: mc rm --older-than 30d --recursive --force bucket/logs
+# @end
+minio_cronjobs: []
+
+...

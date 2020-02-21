@@ -1,0 +1,71 @@
+# Standards: 0.1
+---
+- name: Create required dirs
+  with_items:
+    - '{{ minio_server_volume }}'
+    - /root/.mc
+  file:
+    path: '{{ item }}'
+    state: directory
+  tags:
+    - minio
+
+- name: Write default config
+  notify:
+    - Restart minio
+  template:
+    src: default.j2
+    dest: /etc/default/minio
+  tags:
+    - minio
+
+- name: Prepare service file
+  notify:
+    - Restart minio
+  template:
+    src: service.j2
+    dest: /etc/systemd/system/minio.service
+  tags:
+    - minio
+
+- name: Start minio service
+  systemd:
+    name: minio
+    state: started
+    daemon_reload: yes
+    masked: no
+    enabled: yes
+  tags:
+    - minio
+
+- name: Download client cli
+  get_url:
+    url: '{{ minio_client_url }}'
+    dest: /usr/local/bin/mc
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - minio
+
+- name: Write client config
+  template:
+    src: config.j2
+    dest: /root/.mc/config.json
+  tags:
+    - minio
+
+- name: Create cronjobs entries
+  loop: '{{ minio_cronjobs }}'
+  loop_control:
+    label: '{{ item.name }}'
+  cron:
+    name: '{{ item.name }}'
+    minute: '{{ item.minute | default("*") }}'
+    hour: '{{ item.hour | default("*") }}'
+    day: '{{ item.day | default("*") }}'
+    month: '{{ item.month | default("*") }}'
+    weekday: '{{ item.weekday | default("*") }}'
+    job: '{{ item.job }}'
+  tags:
+    - minio
+
+...
