@@ -2,7 +2,7 @@
 ---
 - name: Create required dirs
   with_items:
-    - '{{ minio_server_volume }}'
+    - '{{ minio_volume_server }}'
     - /root/.mc
   file:
     path: '{{ item }}'
