@@ -1,5 +1,9 @@
 ---
 - name: Converge
   hosts: all
+  vars:
+    minio_network: bridge
+    minio_publish: 127.0.0.1:9000
   roles:
-    - role: mdadm
+    - role: docker
+    - role: minio
