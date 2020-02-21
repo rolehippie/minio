@@ -3,7 +3,7 @@
   hosts: all
   vars:
     minio_network: bridge
-    minio_publish: 127.0.0.1:9000
+    minio_publish_server: 127.0.0.1:9000
   roles:
     - role: docker
     - role: minio
