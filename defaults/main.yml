@@ -25,11 +25,12 @@ minio_insecure_middlewares:
   - https@file
   - errors@file
 
-# @var minio_domain:description: Domain to access this instance
-minio_domain: localhost
+# @var minio_domains:description: Domains to access this instance
+minio_domains:
+  - localhost
 
-# @var minio_prefix:description: Optional path prefix to access it
-minio_prefix:
+# @var minio_prefixes:description: Optional path prefixes to access it
+minio_prefixes: []
 
 # @var minio_access_key:description: For security reasons you should overwrite this value by your own
 minio_access_key: 69c353dfb7d5caa1a0f8eaf91f52120dc7f713c9
