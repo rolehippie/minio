@@ -21,7 +21,7 @@ ExecStart=/usr/bin/docker run --rm \
   --label traefik.http.services.minio.loadbalancer.server.port=9000 \
   --label traefik.http.services.minio.loadbalancer.server.scheme=http \
   --label traefik.http.services.minio.loadbalancer.passhostheader=true \
-  --label traefik.http.routers.minio.rule="Host(`{{ minio_domain.split(",") | join("`, `") }}`){% if minio_prefix | default(False) %} && PathPrefix(`{{ minio_prefix.split(",") | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(False) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
   --label traefik.http.routers.minio.service=minio@docker \
   --label traefik.http.routers.minio.entrypoints=https \
   --label traefik.http.routers.minio.tls=true \
@@ -29,7 +29,7 @@ ExecStart=/usr/bin/docker run --rm \
   --label traefik.http.routers.minio.tls.certresolver={{ minio_cert_resolver }} \
 {% endif %}
   --label traefik.http.routers.minio.middlewares={{ minio_secure_middlewares | join(",") }} \
-  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domain.split(",") | join("`, `") }}`){% if minio_prefix | default(False) %} && PathPrefix(`{{ minio_prefix.split(",") | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(False) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
   --label traefik.http.routers.minio-insecure.service=minio@docker \
   --label traefik.http.routers.minio-insecure.entrypoints=http \
   --label traefik.http.routers.minio-insecure.middlewares={{ minio_insecure_middlewares | join(",") }} \

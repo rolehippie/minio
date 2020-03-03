@@ -2,7 +2,7 @@
   "version": "9",
   "hosts": {
     "local": {
-      "url": "https://{{ minio_domain.split(",") | first }}",
+      "url": "https://{{ minio_domains | first }}",
       "accessKey": "{{ minio_access_key }}",
       "secretKey": "{{ minio_secret_key }}",
       "api": "S3v4",
