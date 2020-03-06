@@ -11,11 +11,11 @@ Ansible role to configure minio
   * [minio_cert_resolver](#minio_cert_resolver)
   * [minio_client_url](#minio_client_url)
   * [minio_cronjobs](#minio_cronjobs)
-  * [minio_domain](#minio_domain)
+  * [minio_domains](#minio_domains)
   * [minio_image](#minio_image)
   * [minio_insecure_middlewares](#minio_insecure_middlewares)
   * [minio_network](#minio_network)
-  * [minio_prefix](#minio_prefix)
+  * [minio_prefixes](#minio_prefixes)
   * [minio_prometheus_auth_type](#minio_prometheus_auth_type)
   * [minio_publish_server](#minio_publish_server)
   * [minio_region](#minio_region)
@@ -83,14 +83,15 @@ minio_cronjobs:
     job: mc rm --older-than 30d --recursive --force bucket/logs
 ```
 
-### minio_domain
+### minio_domains
 
-Domain to access this instance
+Domains to access this instance
 
 #### Default value
 
 ```YAML
-minio_domain: localhost
+minio_domains:
+  - localhost
 ```
 
 ### minio_image
@@ -125,14 +126,14 @@ Docker network to connect to
 minio_network: traefik
 ```
 
-### minio_prefix
+### minio_prefixes
 
-Optional path prefix to access it
+Optional path prefixes to access it
 
 #### Default value
 
 ```YAML
-minio_prefix:
+minio_prefixes: []
 ```
 
 ### minio_prometheus_auth_type
