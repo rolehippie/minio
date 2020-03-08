@@ -14,7 +14,7 @@ galaxy_info:
     - minio
     - s3
 
-dependencies:
-  - rolehippie.docker
+# rolehippie.docker
+dependencies: []
 
 ...
