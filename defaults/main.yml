@@ -13,7 +13,8 @@ minio_volume_server: /var/lib/minio
 minio_publish_server:
 
 # @var minio_cert_resolver:description: Cert resolver within traefik
-minio_cert_resolver: default
+# @var minio_cert_resolver:example: $ "default"
+minio_cert_resolver:
 
 # @var minio_secure_middlewares:description: Secure middlewares for traefik
 minio_secure_middlewares:
