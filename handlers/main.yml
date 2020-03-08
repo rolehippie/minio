@@ -4,6 +4,6 @@
   systemd:
     name: minio
     state: restarted
-    daemon_reload: yes
+    daemon_reload: True
 
 ...

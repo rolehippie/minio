@@ -2,10 +2,10 @@
 ---
 - name: Create required dirs
   with_items:
-    - '{{ minio_volume_server }}'
+    - "{{ minio_volume_server }}"
     - /root/.mc
   file:
-    path: '{{ item }}'
+    path: "{{ item }}"
     state: directory
   tags:
     - minio
@@ -28,19 +28,24 @@
   tags:
     - minio
 
+- name: Create docker network
+  when: minio_network | default(False)
+  docker_network:
+    name: "{{ minio_network }}"
+
 - name: Start minio service
   systemd:
     name: minio
     state: started
-    daemon_reload: yes
-    masked: no
-    enabled: yes
+    daemon_reload: True
+    masked: False
+    enabled: True
   tags:
     - minio
 
-- name: Download client cli
+- name: Download client binary
   get_url:
-    url: '{{ minio_client_url }}'
+    url: "{{ minio_client_url }}"
     dest: /usr/local/bin/mc
     mode: u=rwx,g=rx,o=rx
   tags:
@@ -54,17 +59,17 @@
     - minio
 
 - name: Create cronjobs entries
-  loop: '{{ minio_cronjobs }}'
+  loop: "{{ minio_cronjobs }}"
   loop_control:
-    label: '{{ item.name }}'
+    label: "{{ item.name }}"
   cron:
-    name: '{{ item.name }}'
-    minute: '{{ item.minute | default("*") }}'
-    hour: '{{ item.hour | default("*") }}'
-    day: '{{ item.day | default("*") }}'
-    month: '{{ item.month | default("*") }}'
-    weekday: '{{ item.weekday | default("*") }}'
-    job: '{{ item.job }}'
+    name: "{{ item.name }}"
+    minute: "{{ item.minute | default('*') }}"
+    hour: "{{ item.hour | default('*') }}"
+    day: "{{ item.day | default('*') }}"
+    month: "{{ item.month | default('*') }}"
+    weekday: "{{ item.weekday | default('*') }}"
+    job: "{{ item.job }}"
   tags:
     - minio
 
