@@ -1,8 +1,9 @@
 # Standards: 0.1
 ---
 # @meta author:value: [Thomas Boerger](https://github.com/tboerger)
-# @meta dependencies: >
+# @meta dependencies:value: >
 # [docker](https://github.com/rolehippie/docker)
+# [traefik](https://github.com/rolehippie/traefik)
 # @end
 galaxy_info:
   author: Thomas Boerger

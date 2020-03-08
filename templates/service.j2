@@ -17,7 +17,9 @@ ExecStart=/usr/bin/docker run --rm \
   --name %p \
   --hostname %p \
   --label traefik.enable=true \
+{% if minio_network | default(False) %}
   --label traefik.docker.network={{ minio_network }} \
+{% endif %}
   --label traefik.http.services.minio.loadbalancer.server.port=9000 \
   --label traefik.http.services.minio.loadbalancer.server.scheme=http \
   --label traefik.http.services.minio.loadbalancer.passhostheader=true \
