@@ -47,6 +47,12 @@ Cert resolver within traefik
 #### Default value
 
 ```YAML
+minio_cert_resolver:
+```
+
+#### Example usage
+
+```YAML
 minio_cert_resolver: default
 ```
 
@@ -121,6 +127,12 @@ minio_insecure_middlewares:
 Docker network to connect to
 
 #### Default value
+
+```YAML
+minio_network:
+```
+
+#### Example usage
 
 ```YAML
 minio_network: traefik
@@ -200,7 +212,8 @@ minio_volume_server: /var/lib/minio
 
 ## Dependencies
 
-- '[docker](https://github.com/rolehippie/docker)'
+* [docker](https://github.com/rolehippie/docker)
+* [traefik](https://github.com/rolehippie/traefik)
 
 ## License
 
