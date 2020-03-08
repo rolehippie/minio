@@ -4,7 +4,8 @@
 minio_image: webhippie/minio:latest
 
 # @var minio_network:description: Docker network to connect to
-minio_network: traefik
+# @var minio_network:example: $ "traefik"
+minio_network:
 
 # @var minio_volume_server:description: Path to server volume
 minio_volume_server: /var/lib/minio

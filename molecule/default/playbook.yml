@@ -2,7 +2,6 @@
 - name: Converge
   hosts: all
   vars:
-    minio_network: bridge
     minio_publish_server: 127.0.0.1:9000
   roles:
     - role: docker
