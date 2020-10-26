@@ -1,8 +1,14 @@
 # minio
 
-[![Build Status](https://cloud.drone.io/api/badges/rolehippie/minio/status.svg)](https://cloud.drone.io/rolehippie/minio)
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/minio) [![Build Status](https://img.shields.io/drone/build/rolehippie/minio/master?logo=drone)](https://cloud.drone.io/rolehippie/minio) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/minio)](https://github.com/rolehippie/minio/blob/master/LICENSE) 
 
-Ansible role to configure minio
+Ansible role to install and configure MinIO. 
+
+## Sponsor 
+
+[![Proact Deutschland GmbH](https://proact.eu/wp-content/uploads/2020/03/proact-logo.png)](https://proact.eu) 
+
+Building and improving this Ansible role have been sponsored by my employer **Proact Deutschland GmbH**.
 
 ## Table of content
 
@@ -212,8 +218,8 @@ minio_volume_server: /var/lib/minio
 
 ## Dependencies
 
-* [docker](https://github.com/rolehippie/docker)
-* [traefik](https://github.com/rolehippie/traefik)
+* [rolehippie.docker](https://github.com/rolehippie/docker)
+* [rolehippie.traefik](https://github.com/rolehippie/traefik)
 
 ## License
 
