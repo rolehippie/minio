@@ -1,0 +1,12 @@
+# Standards: 1.2
+---
+collections: []
+roles:
+  - src: https://github.com/rolehippie/docker.git
+    scm: git
+    version: master
+  - src: https://github.com/rolehippie/traefik.git
+    scm: git
+    version: master
+
+...

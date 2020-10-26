@@ -1,4 +1,4 @@
-# Standards: 0.1
+# Standards: 1.2
 ---
 # @var minio_image:description: Docker image to use
 minio_image: webhippie/minio:latest
