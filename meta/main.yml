@@ -21,6 +21,8 @@
 # [rolehippie.traefik](https://github.com/rolehippie/traefik)
 # @end
 galaxy_info:
+  role_name: minio
+  namespace: rolehippie
   author: Thomas Boerger
   description: Ansible role to install and configure MinIO
   license: Apache-2.0
