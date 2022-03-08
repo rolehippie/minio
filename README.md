@@ -1,36 +1,37 @@
 # minio
 
-[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/minio) [![Testing Build](https://github.com/rolehippie/minio/workflows/testing/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Atesting) [![Readme Build](https://github.com/rolehippie/minio/workflows/readme/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Areadme) [![Galaxy Build](https://github.com/rolehippie/minio/workflows/galaxy/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Agalaxy) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/minio)](https://github.com/rolehippie/minio/blob/master/LICENSE) 
+[![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/minio) [![Testing Build](https://github.com/rolehippie/minio/workflows/testing/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Atesting) [![Readme Build](https://github.com/rolehippie/minio/workflows/readme/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Areadme) [![Galaxy Build](https://github.com/rolehippie/minio/workflows/galaxy/badge.svg)](https://github.com/rolehippie/minio/actions?query=workflow%3Agalaxy) [![License: Apache-2.0](https://img.shields.io/github/license/rolehippie/minio)](https://github.com/rolehippie/minio/blob/master/LICENSE)
 
-Ansible role to install and configure MinIO. 
+Ansible role to install and configure MinIO.
 
-## Sponsor 
+## Sponsor
 
-[![Proact Deutschland GmbH](https://proact.eu/wp-content/uploads/2020/03/proact-logo.png)](https://proact.eu) 
+[![Proact Deutschland GmbH](https://proact.eu/wp-content/uploads/2020/03/proact-logo.png)](https://proact.eu)
 
 Building and improving this Ansible role have been sponsored by my employer **Proact Deutschland GmbH**.
 
 ## Table of content
 
-* [Default Variables](#default-variables)
-  * [minio_access_key](#minio_access_key)
-  * [minio_cert_resolver](#minio_cert_resolver)
-  * [minio_client_url](#minio_client_url)
-  * [minio_cronjobs](#minio_cronjobs)
-  * [minio_domains](#minio_domains)
-  * [minio_image](#minio_image)
-  * [minio_insecure_middlewares](#minio_insecure_middlewares)
-  * [minio_network](#minio_network)
-  * [minio_prefixes](#minio_prefixes)
-  * [minio_prometheus_auth_type](#minio_prometheus_auth_type)
-  * [minio_publish_server](#minio_publish_server)
-  * [minio_region](#minio_region)
-  * [minio_secret_key](#minio_secret_key)
-  * [minio_secure_middlewares](#minio_secure_middlewares)
-  * [minio_volume_server](#minio_volume_server)
-* [Dependencies](#dependencies)
-* [License](#license)
-* [Author](#author)
+- [Default Variables](#default-variables)
+  - [minio_access_key](#minio_access_key)
+  - [minio_cert_resolver](#minio_cert_resolver)
+  - [minio_client_url](#minio_client_url)
+  - [minio_cronjobs](#minio_cronjobs)
+  - [minio_domains](#minio_domains)
+  - [minio_image](#minio_image)
+  - [minio_insecure_middlewares](#minio_insecure_middlewares)
+  - [minio_network](#minio_network)
+  - [minio_prefixes](#minio_prefixes)
+  - [minio_prometheus_auth_type](#minio_prometheus_auth_type)
+  - [minio_publish_server](#minio_publish_server)
+  - [minio_region](#minio_region)
+  - [minio_secret_key](#minio_secret_key)
+  - [minio_secure_middlewares](#minio_secure_middlewares)
+  - [minio_volume_server](#minio_volume_server)
+- [Discovered Tags](#discovered-tags)
+- [Dependencies](#dependencies)
+- [License](#license)
+- [Author](#author)
 
 ---
 
@@ -216,10 +217,15 @@ Path to server volume
 minio_volume_server: /var/lib/minio
 ```
 
+## Discovered Tags
+
+**_minio_**
+
+
 ## Dependencies
 
-* [rolehippie.docker](https://github.com/rolehippie/docker)
-* [rolehippie.traefik](https://github.com/rolehippie/traefik)
+- [rolehippie.docker](https://github.com/rolehippie/docker)
+- [rolehippie.traefik](https://github.com/rolehippie/traefik)
 
 ## License
 
