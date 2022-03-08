@@ -7,6 +7,9 @@
   file:
     path: "{{ item }}"
     state: directory
+    owner: root
+    group: root
+    mode: u=rwx,g=rx,o=rx
   tags:
     - minio
 
@@ -16,6 +19,9 @@
   template:
     src: default.j2
     dest: /etc/default/minio
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
   tags:
     - minio
 
@@ -25,6 +31,9 @@
   template:
     src: service.j2
     dest: /etc/systemd/system/minio.service
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
   tags:
     - minio
 
@@ -47,6 +56,8 @@
   get_url:
     url: "{{ minio_client_url }}"
     dest: /usr/local/bin/mc
+    owner: root
+    group: root
     mode: u=rwx,g=rx,o=rx
   tags:
     - minio
@@ -55,6 +66,9 @@
   template:
     src: config.j2
     dest: /root/.mc/config.json
+    owner: root
+    group: root
+    mode: u=rw,g=,o=
   tags:
     - minio
 
