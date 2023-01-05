@@ -5,7 +5,7 @@
   vars:
     minio_publish_server: 127.0.0.1:9000
   roles:
-    - role: docker
-    - role: minio
+    - role: rolehippie.docker
+    - role: rolehippie.minio
 
 ...
