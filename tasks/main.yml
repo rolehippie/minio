@@ -37,10 +37,22 @@
   tags:
     - minio
 
+- name: Pull docker image
+  when:
+    - minio_pull_image
+  docker_image:
+    name: "{{ minio_image }}"
+    source: pull
+  tags:
+    - minio
+
 - name: Create docker network
-  when: minio_network | default(False)
+  when:
+    - minio_network | default(False)
   docker_network:
-    name: "{{ minio_network }}"
+    name: '{{ minio_network }}'
+  tags:
+    - minio
 
 - name: Start minio service
   systemd:

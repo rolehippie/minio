@@ -3,6 +3,9 @@
 # @var minio_image:description: Docker image to use
 minio_image: webhippie/minio:latest
 
+# @var minio_pull_image:description: Pull image as part of the tasks
+minio_pull_image: True
+
 # @var minio_network:description: Docker network to connect to
 # @var minio_network:example: $ "traefik"
 minio_network:

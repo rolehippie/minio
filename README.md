@@ -28,6 +28,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [minio_prefixes](#minio_prefixes)
   - [minio_prometheus_auth_type](#minio_prometheus_auth_type)
   - [minio_publish_server](#minio_publish_server)
+  - [minio_pull_image](#minio_pull_image)
   - [minio_region](#minio_region)
   - [minio_secret_key](#minio_secret_key)
   - [minio_secure_middlewares](#minio_secure_middlewares)
@@ -182,6 +183,16 @@ Publish the service on that binding
 
 ```YAML
 minio_publish_server:
+```
+
+### minio_pull_image
+
+Pull image as part of the tasks
+
+#### Default value
+
+```YAML
+minio_pull_image: true
 ```
 
 ### minio_region
