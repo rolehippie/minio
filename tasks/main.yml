@@ -3,7 +3,7 @@
   with_items:
     - "{{ minio_volume_server }}"
     - /root/.mc
-  file:
+  ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: root
@@ -15,7 +15,7 @@
 - name: Write default config
   notify:
     - Restart minio
-  template:
+  ansible.builtin.template:
     src: default.j2
     dest: /etc/default/minio
     owner: root
@@ -27,7 +27,7 @@
 - name: Prepare service file
   notify:
     - Restart minio
-  template:
+  ansible.builtin.template:
     src: service.j2
     dest: /etc/systemd/system/minio.service
     owner: root
@@ -39,7 +39,7 @@
 - name: Pull docker image
   when:
     - minio_pull_image
-  docker_image:
+  community.docker.docker_image:
     name: "{{ minio_image }}"
     source: pull
   tags:
@@ -48,13 +48,13 @@
 - name: Create docker network
   when:
     - minio_network | default(False)
-  docker_network:
+  community.docker.docker_network:
     name: '{{ minio_network }}'
   tags:
     - minio
 
 - name: Start minio service
-  systemd:
+  ansible.builtin.systemd:
     name: minio
     state: started
     daemon_reload: True
@@ -64,7 +64,7 @@
     - minio
 
 - name: Download client binary
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ minio_client_url }}"
     dest: /usr/local/bin/mc
     owner: root
@@ -74,7 +74,7 @@
     - minio
 
 - name: Write client config
-  template:
+  ansible.builtin.template:
     src: config.j2
     dest: /root/.mc/config.json
     owner: root
@@ -87,7 +87,7 @@
   loop: "{{ minio_cronjobs }}"
   loop_control:
     label: "{{ item.name }}"
-  cron:
+  ansible.builtin.cron:
     name: "{{ item.name }}"
     minute: "{{ item.minute | default('*') }}"
     hour: "{{ item.hour | default('*') }}"
