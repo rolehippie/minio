@@ -1,5 +1,18 @@
 # Changelog
 
+## [2.0.0](https://github.com/rolehippie/minio/compare/v1.1.0...v2.0.0) (2024-02-12)
+
+
+### Features
+
+* drop support for ubuntu 18.04 ([d434516](https://github.com/rolehippie/minio/commit/d434516296b26efe59f07166022f172f7c39f72e))
+* used full qualified collection names ([985180a](https://github.com/rolehippie/minio/commit/985180a05758568deaf992d09f0ff6ce0276a867))
+
+
+### Bugfixes
+
+* remove meta requirements and document used collections ([2293065](https://github.com/rolehippie/minio/commit/22930654cd437cfaf37eeab70c69bf9ca544b443))
+
 ## [1.1.0](https://github.com/rolehippie/minio/compare/v1.0.0...v1.1.0) (2023-07-10)
 
 
