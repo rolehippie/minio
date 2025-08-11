@@ -1,4 +1,4 @@
-# minio
+# workspace
 
 [![Source Code](https://img.shields.io/badge/github-source%20code-blue?logo=github&logoColor=white)](https://github.com/rolehippie/minio)
 [![General Workflow](https://github.com/rolehippie/minio/actions/workflows/general.yml/badge.svg)](https://github.com/rolehippie/minio/actions/workflows/general.yml)
@@ -239,7 +239,6 @@ minio_volume_server: /var/lib/minio
 ## Discovered Tags
 
 **_minio_**
-
 
 ## Dependencies
 
