@@ -30,10 +30,14 @@ galaxy_info:
       versions:
         - focal
         - jammy
+        - noble
   galaxy_tags:
     - minio
     - s3
 
 dependencies: []
+
+collections:
+  - community.docker
 
 ...

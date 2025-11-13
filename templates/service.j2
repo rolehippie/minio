@@ -16,33 +16,33 @@ ExecStart=/usr/bin/docker run --rm \
   --name %p \
   --hostname %p \
   --label traefik.enable=true \
-{% if minio_network | default(False) %}
+{% if minio_network | default(false) %}
   --label traefik.docker.network={{ minio_network }} \
 {% endif %}
   --label traefik.http.services.minio.loadbalancer.server.port=9000 \
   --label traefik.http.services.minio.loadbalancer.server.scheme=http \
   --label traefik.http.services.minio.loadbalancer.passhostheader=true \
-  --label traefik.http.routers.minio.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(False) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(false) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
   --label traefik.http.routers.minio.service=minio@docker \
   --label traefik.http.routers.minio.entrypoints=https \
   --label traefik.http.routers.minio.tls=true \
-{% if minio_cert_resolver | default(False) %}
+{% if minio_cert_resolver | default(false) %}
   --label traefik.http.routers.minio.tls.certresolver={{ minio_cert_resolver }} \
 {% endif %}
   --label traefik.http.routers.minio.middlewares={{ minio_secure_middlewares | join(",") }} \
-  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(False) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
+  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(false) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
   --label traefik.http.routers.minio-insecure.service=minio@docker \
   --label traefik.http.routers.minio-insecure.entrypoints=http \
   --label traefik.http.routers.minio-insecure.middlewares={{ minio_insecure_middlewares | join(",") }} \
   --env-file /etc/default/minio \
-{% if minio_network | default(False) %}
+{% if minio_network | default(false) %}
   --network {{ minio_network }} \
 {% endif %}
   --volume /etc/ssl:/etc/ssl:ro \
-{% if minio_volume_server | default(False) %}
+{% if minio_volume_server | default(false) %}
   --volume {{ minio_volume_server }}:/var/lib/minio \
 {% endif %}
-{% if minio_publish_server | default(False) %}
+{% if minio_publish_server | default(false) %}
   --publish {{ minio_publish_server }}:9000 \
 {% endif %}
   --health-cmd /usr/bin/healthcheck \

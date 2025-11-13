@@ -1,6 +1,6 @@
 ---
 - name: Create required dirs
-  with_items:
+  loop:
     - "{{ minio_volume_server }}"
     - /root/.mc
   ansible.builtin.file:
@@ -47,7 +47,7 @@
 
 - name: Create docker network
   when:
-    - minio_network | default(False)
+    - false if minio_network is none else (minio_network | length > 0)| default(false)
   community.docker.docker_network:
     name: '{{ minio_network }}'
   tags:
@@ -57,9 +57,9 @@
   ansible.builtin.systemd:
     name: minio
     state: started
-    daemon_reload: True
-    masked: False
-    enabled: True
+    daemon_reload: true
+    masked: false
+    enabled: true
   tags:
     - minio
 
