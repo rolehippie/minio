@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/rolehippie/minio/compare/v2.0.0...v2.1.0) (2025-11-17)
+
+
+### Features
+
+* apply new repo structure and update linting ([5a150b5](https://github.com/rolehippie/minio/commit/5a150b5da94fe7de17f23797719695ae70a1a0e9))
+
 ## [2.0.0](https://github.com/rolehippie/minio/compare/v1.1.0...v2.0.0) (2024-02-12)
 
 
