@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.0](https://github.com/rolehippie/minio/compare/v2.1.0...v3.0.0) (2025-12-01)
+
+
+### Features
+
+* **major:** update dependency community.docker to v5 ([c97af5d](https://github.com/rolehippie/minio/commit/c97af5dc8a79b3bc6ae258726c8c8b588b5263dc))
+
 ## [2.1.0](https://github.com/rolehippie/minio/compare/v2.0.0...v2.1.0) (2025-11-17)
 
 
