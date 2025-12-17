@@ -2,6 +2,8 @@
 - name: Converge
   hosts: all
   vars:
+    docker_daemon_config:
+      storage-driver: vfs
     minio_publish_server: 127.0.0.1:9000
   roles:
     - role: rolehippie.docker
