@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.2.0](https://github.com/rolehippie/minio/compare/v3.1.0...v3.2.0) (2026-04-13)
+
+### Dependencies
+
+* **minor:** update dependency community.docker to >=5.2.0,<5.3.0 ([6482037](https://github.com/rolehippie/minio/commit/6482037fbddab6b0f6c458893257ce3da00f21ae))
+
+### Miscellaneous
+
+* **flake:** updated lockfile [skip ci] ([15ac7cc](https://github.com/rolehippie/minio/commit/15ac7cc943b415591253977faa922357515f12b0))
+* **flake:** updated lockfile [skip ci] ([837d09b](https://github.com/rolehippie/minio/commit/837d09bb47ed40317ed8fc12253d4f6f5615095c))
+
 ## [3.1.0](https://github.com/rolehippie/minio/compare/v3.0.0...v3.1.0) (2026-03-30)
 
 ### Dependencies
