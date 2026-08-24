@@ -1,13 +1,46 @@
 ---
+- name: Create defined group
+  register: minio_group_result
+  ansible.builtin.group:
+    name: "{{ minio_group }}"
+    system: true
+    state: present
+  tags:
+    - minio
+
+- name: Create defined user
+  register: minio_user_result
+  ansible.builtin.user:
+    name: "{{ minio_user }}"
+    group: "{{ minio_group }}"
+    comment: Minio
+    password: "!"
+    shell: /usr/sbin/nologin
+    home: "{{ minio_volume_server }}"
+    createhome: false
+    system: true
+    state: present
+  tags:
+    - minio
+
 - name: Create required dirs
   loop:
-    - "{{ minio_volume_server }}"
     - /root/.mc
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
     owner: root
     group: root
+    mode: u=rwx,g=rx,o=rx
+  tags:
+    - minio
+
+- name: Create data dir
+  ansible.builtin.file:
+    path: "{{ minio_volume_server }}"
+    state: directory
+    owner: "{{ minio_user_result.uid }}"
+    group: "{{ minio_group_result.gid }}"
     mode: u=rwx,g=rx,o=rx
   tags:
     - minio
@@ -47,9 +80,10 @@
 
 - name: Create docker network
   when:
-    - false if minio_network is none else (minio_network | length > 0)| default(false)
+    - minio_network is not none
+    - minio_network | length > 0
   community.docker.docker_network:
-    name: '{{ minio_network }}'
+    name: "{{ minio_network }}"
   tags:
     - minio
 

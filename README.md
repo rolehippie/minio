@@ -17,11 +17,14 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
+  - [kubectl_arch](#kubectl_arch)
   - [minio_access_key](#minio_access_key)
   - [minio_cert_resolver](#minio_cert_resolver)
+  - [minio_client_arch](#minio_client_arch)
   - [minio_client_url](#minio_client_url)
   - [minio_cronjobs](#minio_cronjobs)
   - [minio_domains](#minio_domains)
+  - [minio_group](#minio_group)
   - [minio_image](#minio_image)
   - [minio_insecure_middlewares](#minio_insecure_middlewares)
   - [minio_network](#minio_network)
@@ -32,6 +35,7 @@ Building and improving this Ansible role have been sponsored by my current and p
   - [minio_region](#minio_region)
   - [minio_secret_key](#minio_secret_key)
   - [minio_secure_middlewares](#minio_secure_middlewares)
+  - [minio_user](#minio_user)
   - [minio_volume_server](#minio_volume_server)
 - [Discovered Tags](#discovered-tags)
 - [Dependencies](#dependencies)
@@ -45,6 +49,10 @@ Building and improving this Ansible role have been sponsored by my current and p
 - Minimum Ansible version: `2.10`
 
 ## Default Variables
+
+### kubectl_arch
+
+Architecture for the kubectl release
 
 ### minio_access_key
 
@@ -72,6 +80,14 @@ minio_cert_resolver:
 minio_cert_resolver: default
 ```
 
+### minio_client_arch
+
+#### Default value
+
+```YAML
+minio_client_arch: "{{ 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else 'amd64' }}"
+```
+
 ### minio_client_url
 
 Download URL for Minio CLI
@@ -79,7 +95,7 @@ Download URL for Minio CLI
 #### Default value
 
 ```YAML
-minio_client_url: https://dl.minio.io/client/mc/release/linux-amd64/mc
+minio_client_url: https://dl.minio.io/client/mc/release/linux-{{ minio_client_arch }}/mc
 ```
 
 ### minio_cronjobs
@@ -114,6 +130,16 @@ Domains to access this instance
 ```YAML
 minio_domains:
   - localhost
+```
+
+### minio_group
+
+System group for the Minio service
+
+#### Default value
+
+```YAML
+minio_group: minio
 ```
 
 ### minio_image
@@ -224,6 +250,16 @@ Secure middlewares for traefik
 minio_secure_middlewares:
   - secure@file
   - errors@file
+```
+
+### minio_user
+
+System user for the Minio service
+
+#### Default value
+
+```YAML
+minio_user: minio
 ```
 
 ### minio_volume_server

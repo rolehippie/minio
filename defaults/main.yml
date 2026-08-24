@@ -45,8 +45,11 @@ minio_secret_key: 954cde1f5a3c9b090584e7794ab9a71f9d11d7a1
 # @var minio_region:description: Region used within this instance
 minio_region: us-east-1
 
+# @var kubectl_arch:description: Architecture for the kubectl release
+minio_client_arch: "{{ 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else 'amd64' }}"
+
 # @var minio_client_url:description: Download URL for Minio CLI
-minio_client_url: https://dl.minio.io/client/mc/release/linux-amd64/mc
+minio_client_url: "https://dl.minio.io/client/mc/release/linux-{{ minio_client_arch }}/mc"
 
 # @var minio_prometheus_auth_type:description: Auth type for prometheus endpoint
 minio_prometheus_auth_type: public
@@ -63,5 +66,11 @@ minio_prometheus_auth_type: public
 #     job: mc rm --older-than 30d --recursive --force bucket/logs
 # @end
 minio_cronjobs: []
+
+# @var minio_group:description: System group for the Minio service
+minio_group: minio
+
+# @var minio_user:description: System user for the Minio service
+minio_user: minio
 
 ...
