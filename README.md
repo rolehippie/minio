@@ -19,22 +19,28 @@ Building and improving this Ansible role have been sponsored by my current and p
 - [Default Variables](#default-variables)
   - [kubectl_arch](#kubectl_arch)
   - [minio_access_key](#minio_access_key)
-  - [minio_cert_resolver](#minio_cert_resolver)
   - [minio_client_arch](#minio_client_arch)
   - [minio_client_url](#minio_client_url)
+  - [minio_cpu_shares](#minio_cpu_shares)
   - [minio_cronjobs](#minio_cronjobs)
-  - [minio_domains](#minio_domains)
+  - [minio_default_labels](#minio_default_labels)
+  - [minio_default_publish](#minio_default_publish)
+  - [minio_default_volumes](#minio_default_volumes)
+  - [minio_domain](#minio_domain)
+  - [minio_extra_labels](#minio_extra_labels)
+  - [minio_extra_publish](#minio_extra_publish)
+  - [minio_extra_volumes](#minio_extra_volumes)
   - [minio_group](#minio_group)
   - [minio_image](#minio_image)
-  - [minio_insecure_middlewares](#minio_insecure_middlewares)
+  - [minio_memory_limit](#minio_memory_limit)
+  - [minio_memory_soft_limit](#minio_memory_soft_limit)
+  - [minio_memory_swap](#minio_memory_swap)
   - [minio_network](#minio_network)
-  - [minio_prefixes](#minio_prefixes)
+  - [minio_number_of_cpus](#minio_number_of_cpus)
   - [minio_prometheus_auth_type](#minio_prometheus_auth_type)
-  - [minio_publish_server](#minio_publish_server)
   - [minio_pull_image](#minio_pull_image)
   - [minio_region](#minio_region)
   - [minio_secret_key](#minio_secret_key)
-  - [minio_secure_middlewares](#minio_secure_middlewares)
   - [minio_user](#minio_user)
   - [minio_volume_server](#minio_volume_server)
 - [Discovered Tags](#discovered-tags)
@@ -64,22 +70,6 @@ For security reasons you should overwrite this value by your own
 minio_access_key: 69c353dfb7d5caa1a0f8eaf91f52120dc7f713c9
 ```
 
-### minio_cert_resolver
-
-Cert resolver within traefik
-
-#### Default value
-
-```YAML
-minio_cert_resolver:
-```
-
-#### Example usage
-
-```YAML
-minio_cert_resolver: default
-```
-
 ### minio_client_arch
 
 #### Default value
@@ -96,6 +86,22 @@ Download URL for Minio CLI
 
 ```YAML
 minio_client_url: https://dl.minio.io/client/mc/release/linux-{{ minio_client_arch }}/mc
+```
+
+### minio_cpu_shares
+
+CPU shares with Docker deployment
+
+#### Default value
+
+```YAML
+minio_cpu_shares:
+```
+
+#### Example usage
+
+```YAML
+minio_cpu_shares: '512'
 ```
 
 ### minio_cronjobs
@@ -121,15 +127,98 @@ minio_cronjobs:
     job: mc rm --older-than 30d --recursive --force bucket/logs
 ```
 
-### minio_domains
+### minio_default_labels
+
+List of default labels to assign to docker
+
+#### Default value
+
+```YAML
+minio_default_labels: []
+```
+
+### minio_default_publish
+
+List of default port publishing for docker
+
+#### Default value
+
+```YAML
+minio_default_publish: []
+```
+
+#### Example usage
+
+```YAML
+minio_default_publish:
+  - 127.0.0.1:9000:9000
+```
+
+### minio_default_volumes
+
+List of default volumes to mount for docker
+
+#### Default value
+
+```YAML
+minio_default_volumes:
+  - '{{ minio_volume_server }}:/var/lib/minio'
+```
+
+### minio_domain
 
 Domains to access this instance
 
 #### Default value
 
 ```YAML
-minio_domains:
-  - localhost
+minio_domain: localhost
+```
+
+### minio_extra_labels
+
+List of extra labels to assign to docker
+
+#### Default value
+
+```YAML
+minio_extra_labels: []
+```
+
+### minio_extra_publish
+
+List of extra port publishing for docker
+
+#### Default value
+
+```YAML
+minio_extra_publish: []
+```
+
+#### Example usage
+
+```YAML
+minio_extra_publish:
+  - 127.0.0.1:9000:9000
+```
+
+### minio_extra_volumes
+
+List of extra volumes to mount for docker
+
+#### Default value
+
+```YAML
+minio_extra_volumes: []
+```
+
+#### Example usage
+
+```YAML
+minio_extra_volumes:
+  - /path/to/host/folder1:/path/within/container1
+  - /path/to/host/folder2:/path/within/container2
+  - /path/to/host/folder3:/path/within/container3
 ```
 
 ### minio_group
@@ -152,21 +241,57 @@ Docker image to use
 minio_image: webhippie/minio:latest
 ```
 
-### minio_insecure_middlewares
+### minio_memory_limit
 
-Insecure middlewares for traefik
+Memory limit with Docker deployment
 
 #### Default value
 
 ```YAML
-minio_insecure_middlewares:
-  - https@file
-  - errors@file
+minio_memory_limit:
+```
+
+#### Example usage
+
+```YAML
+minio_memory_limit: 1024m
+```
+
+### minio_memory_soft_limit
+
+Soft memory limit with Docker deployment
+
+#### Default value
+
+```YAML
+minio_memory_soft_limit:
+```
+
+#### Example usage
+
+```YAML
+minio_memory_soft_limit: 512m
+```
+
+### minio_memory_swap
+
+Swap usage with Docker deployment
+
+#### Default value
+
+```YAML
+minio_memory_swap:
+```
+
+#### Example usage
+
+```YAML
+minio_memory_swap: 2048m
 ```
 
 ### minio_network
 
-Docker network to connect to
+Optional docker network to attach
 
 #### Default value
 
@@ -174,20 +299,20 @@ Docker network to connect to
 minio_network:
 ```
 
-#### Example usage
+### minio_number_of_cpus
 
-```YAML
-minio_network: traefik
-```
-
-### minio_prefixes
-
-Optional path prefixes to access it
+Number of CPUs with Docker deployment
 
 #### Default value
 
 ```YAML
-minio_prefixes: []
+minio_number_of_cpus:
+```
+
+#### Example usage
+
+```YAML
+minio_number_of_cpus: '1.0'
 ```
 
 ### minio_prometheus_auth_type
@@ -198,16 +323,6 @@ Auth type for prometheus endpoint
 
 ```YAML
 minio_prometheus_auth_type: public
-```
-
-### minio_publish_server
-
-Publish the service on that binding
-
-#### Default value
-
-```YAML
-minio_publish_server:
 ```
 
 ### minio_pull_image
@@ -238,18 +353,6 @@ For security reasons you should overwrite this value by your own
 
 ```YAML
 minio_secret_key: 954cde1f5a3c9b090584e7794ab9a71f9d11d7a1
-```
-
-### minio_secure_middlewares
-
-Secure middlewares for traefik
-
-#### Default value
-
-```YAML
-minio_secure_middlewares:
-  - secure@file
-  - errors@file
 ```
 
 ### minio_user

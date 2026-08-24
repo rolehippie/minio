@@ -5,36 +5,67 @@ minio_image: webhippie/minio:latest
 # @var minio_pull_image:description: Pull image as part of the tasks
 minio_pull_image: true
 
-# @var minio_network:description: Docker network to connect to
-# @var minio_network:example: $ "traefik"
+# @var minio_network:description: Optional docker network to attach
 minio_network:
+
+# @var minio_default_publish:description: List of default port publishing for docker
+# @var minio_default_publish:example: >
+# minio_default_publish:
+#   - 127.0.0.1:9000:9000
+# @end
+minio_default_publish: []
+
+# @var minio_extra_publish:description: List of extra port publishing for docker
+# @var minio_extra_publish:example: >
+# minio_extra_publish:
+#   - 127.0.0.1:9000:9000
+# @end
+minio_extra_publish: []
+
+# @var minio_default_labels:description: List of default labels to assign to docker
+minio_default_labels: []
+
+# @var minio_extra_labels:description: List of extra labels to assign to docker
+minio_extra_labels: []
+
+# @var minio_default_volumes:description: List of default volumes to mount for docker
+minio_default_volumes:
+  - "{{ minio_volume_server }}:/var/lib/minio"
+
+# @var minio_extra_volumes:description: List of extra volumes to mount for docker
+# @var minio_extra_volumes:example: >
+# minio_extra_volumes:
+#   - /path/to/host/folder1:/path/within/container1
+#   - /path/to/host/folder2:/path/within/container2
+#   - /path/to/host/folder3:/path/within/container3
+# @end
+minio_extra_volumes: []
+
+# @var minio_memory_limit:description: Memory limit with Docker deployment
+# @var minio_memory_limit:example: $ "1024m"
+minio_memory_limit:
+
+# @var minio_memory_swap:description: Swap usage with Docker deployment
+# @var minio_memory_swap:example: $ "2048m"
+minio_memory_swap:
+
+# @var minio_memory_soft_limit:description: Soft memory limit with Docker deployment
+# @var minio_memory_soft_limit:example: $ "512m"
+minio_memory_soft_limit:
+
+# @var minio_cpu_shares:description: CPU shares with Docker deployment
+# @var minio_cpu_shares:example: $ "512"
+minio_cpu_shares:
+
+# @var minio_number_of_cpus:description: Number of CPUs with Docker deployment
+# @var minio_number_of_cpus:example: $ "1.0"
+minio_number_of_cpus:
 
 # @var minio_volume_server:description: Path to server volume
 minio_volume_server: /var/lib/minio
 
-# @var minio_publish_server:description: Publish the service on that binding
-minio_publish_server:
-
-# @var minio_cert_resolver:description: Cert resolver within traefik
-# @var minio_cert_resolver:example: $ "default"
-minio_cert_resolver:
-
-# @var minio_secure_middlewares:description: Secure middlewares for traefik
-minio_secure_middlewares:
-  - secure@file
-  - errors@file
-
-# @var minio_insecure_middlewares:description: Insecure middlewares for traefik
-minio_insecure_middlewares:
-  - https@file
-  - errors@file
-
-# @var minio_domains:description: Domains to access this instance
-minio_domains:
-  - localhost
-
-# @var minio_prefixes:description: Optional path prefixes to access it
-minio_prefixes: []
+# @var minio_domain:description: Domains to access this instance
+minio_domain: localhost
 
 # @var minio_access_key:description: For security reasons you should overwrite this value by your own
 minio_access_key: 69c353dfb7d5caa1a0f8eaf91f52120dc7f713c9

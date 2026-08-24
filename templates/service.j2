@@ -15,36 +15,35 @@ ExecStartPre=/bin/sh -c '/usr/bin/docker ps -a | /bin/grep %p 1> /dev/null && /u
 ExecStart=/usr/bin/docker run --rm \
   --name %p \
   --hostname %p \
-  --label traefik.enable=true \
-{% if minio_network | default(false) %}
-  --label traefik.docker.network={{ minio_network }} \
-{% endif %}
-  --label traefik.http.services.minio.loadbalancer.server.port=9000 \
-  --label traefik.http.services.minio.loadbalancer.server.scheme=http \
-  --label traefik.http.services.minio.loadbalancer.passhostheader=true \
-  --label traefik.http.routers.minio.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(false) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
-  --label traefik.http.routers.minio.service=minio@docker \
-  --label traefik.http.routers.minio.entrypoints=https \
-  --label traefik.http.routers.minio.tls=true \
-{% if minio_cert_resolver | default(false) %}
-  --label traefik.http.routers.minio.tls.certresolver={{ minio_cert_resolver }} \
-{% endif %}
-  --label traefik.http.routers.minio.middlewares={{ minio_secure_middlewares | join(",") }} \
-  --label traefik.http.routers.minio-insecure.rule="Host(`{{ minio_domains | join("`, `") }}`){% if minio_prefixes | default(false) %} && PathPrefix(`{{ minio_prefixes | join("`, `") }}`){% endif %}" \
-  --label traefik.http.routers.minio-insecure.service=minio@docker \
-  --label traefik.http.routers.minio-insecure.entrypoints=http \
-  --label traefik.http.routers.minio-insecure.middlewares={{ minio_insecure_middlewares | join(",") }} \
   --env-file /etc/default/minio \
+{% if minio_memory_limit | default(false) %}
+  --memory {{ minio_memory_limit }} \
+{% endif %}
+{% if minio_memory_swap | default(false) %}
+  --memory-swap {{ minio_memory_swap }} \
+{% endif %}
+{% if minio_memory_soft_limit | default(false) %}
+  --memory-reservation {{ minio_memory_soft_limit }} \
+{% endif %}
+{% if minio_cpu_shares | default(false) %}
+  --cpu-shares {{ minio_cpu_shares }} \
+{% endif %}
+{% if minio_number_of_cpus | default(false) %}
+  --cpus {{ minio_number_of_cpus }} \
+{% endif %}
+{% for item in minio_default_labels + minio_extra_labels %}
+  --label {{ item }} \
+{% endfor %}
 {% if minio_network | default(false) %}
   --network {{ minio_network }} \
 {% endif %}
   --volume /etc/ssl:/etc/ssl:ro \
-{% if minio_volume_server | default(false) %}
-  --volume {{ minio_volume_server }}:/var/lib/minio \
-{% endif %}
-{% if minio_publish_server | default(false) %}
-  --publish {{ minio_publish_server }}:9000 \
-{% endif %}
+{% for item in minio_default_volumes + minio_extra_volumes %}
+  --volume {{ item }} \
+{% endfor %}
+{% for item in minio_default_publish + minio_extra_publish %}
+  --publish {{ item }} \
+{% endfor %}
   --health-cmd /usr/bin/healthcheck \
   --health-interval 10s \
   --health-retries 20 \
