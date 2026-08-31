@@ -1,5 +1,27 @@
 # Changelog
 
+## [4.0.0](https://github.com/rolehippie/minio/compare/v3.3.0...v4.0.0) (2026-08-31)
+
+### ⚠ BREAKING CHANGES
+
+* more generic label and volume definitions
+* proper owner for host volume
+
+### Features
+
+* more generic label and volume definitions ([270efb3](https://github.com/rolehippie/minio/commit/270efb3bc9b7837748195baa6b1b5fba875dc87b))
+* proper owner for host volume ([8ce26fb](https://github.com/rolehippie/minio/commit/8ce26fb2f4d7fdc410ddf7b95727e46fbc40c235))
+
+### Dependencies
+
+* **minor:** update dependency pipx:ansible-doctor to v8.4.0 ([c438af8](https://github.com/rolehippie/minio/commit/c438af8e3c931d883ee58198df1cb1fd396f6d84))
+* **minor:** update dependency pipx:ansible-lint to v26.8.0 ([1e72a9b](https://github.com/rolehippie/minio/commit/1e72a9bab420fd641165561704040e4ccad40749))
+* **minor:** update dependency pipx:molecule to v26.8.0 ([8783dfa](https://github.com/rolehippie/minio/commit/8783dfa920b92a3f9d19c3e72bc7bfc17cf2693a))
+* **patch:** update dependency pipx:ansible-core to v2.21.3 ([44c1157](https://github.com/rolehippie/minio/commit/44c11572f2a62cb9062f35c5772492a7f827d301))
+* **patch:** update dependency pipx:ansible-doctor to v8.4.1 ([#57](https://github.com/rolehippie/minio/issues/57)) ([9366039](https://github.com/rolehippie/minio/commit/9366039dbda06694ccaa574963323bf018057096))
+* **patch:** update dependency pre-commit to v4.6.2 ([#54](https://github.com/rolehippie/minio/issues/54)) ([58cf652](https://github.com/rolehippie/minio/commit/58cf652d6ac8487f88bcdf3cfaea95269ff70145))
+* **patch:** update dependency python to v3.14.7 ([#50](https://github.com/rolehippie/minio/issues/50)) ([b32ae3a](https://github.com/rolehippie/minio/commit/b32ae3a8917dbd83236184cde5bdc9c8d1d1599a))
+
 ## [3.3.0](https://github.com/rolehippie/minio/compare/v3.2.0...v3.3.0) (2026-07-27)
 
 ## [3.2.0](https://github.com/rolehippie/minio/compare/v3.1.0...v3.2.0) (2026-04-13)
