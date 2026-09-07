@@ -17,7 +17,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 - [Requirements](#requirements)
 - [Default Variables](#default-variables)
-  - [kubectl_arch](#kubectl_arch)
   - [minio_access_key](#minio_access_key)
   - [minio_client_arch](#minio_client_arch)
   - [minio_client_url](#minio_client_url)
@@ -56,10 +55,6 @@ Building and improving this Ansible role have been sponsored by my current and p
 
 ## Default Variables
 
-### kubectl_arch
-
-Architecture for the kubectl release
-
 ### minio_access_key
 
 For security reasons you should overwrite this value by your own
@@ -71,6 +66,8 @@ minio_access_key: 69c353dfb7d5caa1a0f8eaf91f52120dc7f713c9
 ```
 
 ### minio_client_arch
+
+Architecture for the binary
 
 #### Default value
 
