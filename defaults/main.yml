@@ -1,5 +1,6 @@
 ---
 # @var minio_image:description: Docker image to use
+# renovate: datasource=docker depName=webhippie/minio
 minio_image: webhippie/minio:latest
 
 # @var minio_pull_image:description: Pull image as part of the tasks
@@ -76,7 +77,7 @@ minio_secret_key: 954cde1f5a3c9b090584e7794ab9a71f9d11d7a1
 # @var minio_region:description: Region used within this instance
 minio_region: us-east-1
 
-# @var kubectl_arch:description: Architecture for the kubectl release
+# @var minio_client_arch:description: Architecture for the binary
 minio_client_arch: "{{ 'arm64' if ansible_facts['architecture'] in ['aarch64', 'arm64'] else 'amd64' }}"
 
 # @var minio_client_url:description: Download URL for Minio CLI
