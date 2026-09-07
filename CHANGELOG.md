@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.1.0](https://github.com/rolehippie/minio/compare/v4.0.0...v4.1.0) (2026-09-07)
+
+### Dependencies
+
+* **minor:** update dependency community.docker to >=5.3.0,<5.4.0 ([#58](https://github.com/rolehippie/minio/issues/58)) ([51c97ca](https://github.com/rolehippie/minio/commit/51c97ca8821b72da4c0a736170df378ea5af7a70))
+
 ## [4.0.0](https://github.com/rolehippie/minio/compare/v3.3.0...v4.0.0) (2026-08-31)
 
 ### ⚠ BREAKING CHANGES
